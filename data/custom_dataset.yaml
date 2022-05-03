@@ -8,14 +8,14 @@
 
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: ../datasets/coco_custom  # dataset root dir
-train: images/train2017  # train images (relative to 'path') 128 images
-val: images/val2017  # val images (relative to 'path') 128 images
+path: /home/mao/disk/五角星标注数据集/五角星  # dataset root dir
+train: images  # train images (relative to 'path') 128 images
+val: images  # val images (relative to 'path') 128 images
 test:  # test images (optional)
 
 # Classes
-nc: 3  # number of classes
-names: ['02-RECT', '03-ELLIPSE', '04-TRIANGLE']  # class names
+nc: 11  # number of classes
+names: ['s-1-红色多', 's-2-绿色多', 's-3-红色大一圈', 's-4-绿色大一圈', 's-5-红色有纹', 's-6-绿色有纹', 's-7-错位', 's-8-形状不同', 's-9-二维码', 's-10-只有绿色', 's-11-只有红色']  # class names
 
 
 # Download script/URL (optional)
