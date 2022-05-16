@@ -3,6 +3,7 @@ import glob
 import os.path as osp
 import os
 from tqdm import tqdm
+import shutil
 
 def convert_bbox_coco2yolo(img_width, img_height, bbox):
     """
@@ -51,13 +52,13 @@ def make_folders(path="output"):
     return path
 
 
-def convert_coco_json_to_yolo_txt(output_path, json_file):
+def convert_coco_json_to_yolo_txt(output_path, json_file, anno_txt_files):
     path = make_folders(output_path)
 
     with open(json_file) as f:
         json_data = json.load(f)
 
-
+    
     for image in tqdm(json_data["images"], desc="Annotation txt for each iamge"):
         img_id = image["id"]
         img_name = image["file_name"]
@@ -69,13 +70,28 @@ def convert_coco_json_to_yolo_txt(output_path, json_file):
         with open(anno_txt, "w") as f:
             for anno in anno_in_image:
                 category = anno["category_id"]
+                if category != 0:
+                    continue
                 bbox_COCO = anno["bbox"]
+                if anno_txt not in anno_txt_files:
+                    anno_txt_files.append(anno_txt)
                 x, y, w, h = convert_bbox_coco2yolo(img_width, img_height, bbox_COCO)
                 f.write(f"{category} {x:.6f} {y:.6f} {w:.6f} {h:.6f}\n")
 
     print("Converting COCO Json to YOLO txt finished!")
 
 
+anno_txt_files = []
 for result_json in glob.glob(osp.join('/home/mao/disk/Diff标注数据集', '*/*.json')):
     print(result_json)
-    convert_coco_json_to_yolo_txt("/home/mao/disk/Diff标注数据集/labels", result_json)
+    convert_coco_json_to_yolo_txt("/home/mao/disk/Diff标注数据集/labels", result_json, anno_txt_files)
+
+print(anno_txt_files)
+
+os.makedirs('/home/mao/disk/Diff标注数据集/labels-1', exist_ok=True)
+for anno_txt in anno_txt_files:
+    shutil.copy(anno_txt, '/home/mao/disk/Diff标注数据集/labels-1/'+anno_txt.split('/')[-1])
+
+os.makedirs('/home/mao/disk/Diff标注数据集/images-1', exist_ok=True)
+for anno_txt in anno_txt_files:
+    shutil.copy('/home/mao/disk/Diff标注数据集/images/'+anno_txt.split('/')[-1].replace('.txt', '.jpg'), '/home/mao/disk/Diff标注数据集/images-1/'+anno_txt.split('/')[-1].replace('.txt', '.jpg'))

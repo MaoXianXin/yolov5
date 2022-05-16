@@ -8,14 +8,14 @@
 
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: /home/mao/disk/Diff标注数据集  # dataset root dir
-train: images  # train images (relative to 'path') 128 images
-val: images  # val images (relative to 'path') 128 images
+path: /home/mao/disk/字符不同/split_data  # dataset root dir
+train: train  # train images (relative to 'path') 128 images
+val: train  # val images (relative to 'path') 128 images
 test:  # test images (optional)
 
 # Classes
-nc: 9  # number of classes
-names: ['d-1-字符不同', 'd-2-红色多', 'd-3-绿色多', 'd-4-笔画错位', 'd-5-只有绿色', 'd-6-只有红色', 'n-1-小码错位', 'n-2-小码绿色', 'n-3-小码红色']  # class names
+nc: 1  # number of classes
+names: ['d-1-字符不同']  # class names
 
 
 # Download script/URL (optional)
