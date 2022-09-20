@@ -8,9 +8,9 @@
 
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: /home/mao/disk/字符不同/split_data  # dataset root dir
-train: train  # train images (relative to 'path') 128 images
-val: train  # val images (relative to 'path') 128 images
+path: /home/mao/datasets/20220907训练样本汇总/train_data_20220907-1  # dataset root dir
+train: 20220907-1  # train images (relative to 'path') 128 images
+val: 20220907-1  # val images (relative to 'path') 128 images
 test:  # test images (optional)
 
 # Classes

@@ -256,3 +256,13 @@ crashlytics-build.properties
 fabric.properties
 
 *.txt
+
+02-模型结果/20220517-v1版本/
+
+02-模型结果/20220521-v2-增加POC和假章版本/ncnn模型/
+
+02-模型结果/20220521-v2-增加POC和假章版本/
+
+02-模型结果/20220620-v3-增加56张样本做背景/ncnn模型/
+
+*.tar
