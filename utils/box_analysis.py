@@ -174,8 +174,9 @@ class BoxStatistics:
 def parse_predict_txt(root_dir, samples_cnt):
     all_file_paths = get_file_paths(root_dir)
     all_txt_paths = filter_by_keyword(['.txt'], all_file_paths)
+    all_img_paths = filter_by_keyword(['.bmp'], all_file_paths)
     for i in range(len(samples_cnt['threshold'])):
-        folder = '/'.join(all_file_paths[0].split('/')[:-1])
+        folder = '/'.join(all_img_paths[0].split('/')[:-1])
         if not os.path.exists(os.path.join(folder, str(samples_cnt['threshold'][i]))):
             os.makedirs(os.path.join(folder, str(samples_cnt['threshold'][i])), exist_ok=True)
         for txt_path in all_txt_paths:
