@@ -162,9 +162,14 @@ def run(
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     # print(xyxy)
-                    # box_stats.calc_red_font_box_samples(xyxy, save_path)
+                    # box_stats.calc_black_font_box_samples(xyxy, save_path)
                     # box_stats.calc_num_by_threshold(xyxy, conf, save_path)
                     # box_stats.calc_num_by_threshold_between_two(xyxy, conf, save_path)
+                    # x1, y1, x2, y2 = xyxy
+                    # for row in range(int(y1), int(y2)):
+                    #     for col in range(int(x1), int(x2)):
+                    #         im0[row, col] = [200, 200, 200]
+                    # cv2.imwrite(os.path.join('/home/mao/workspace/yolov5/runs/detect/delete_tnum_imgs', save_path.split('/')[-1]), im0)
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                         # print(xywh)
@@ -244,7 +249,7 @@ def parse_opt():
     parser.add_argument('--project', default=ROOT / 'runs/detect', help='save results to project/name')
     parser.add_argument('--name', default='exp', help='save results to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
-    parser.add_argument('--line-thickness', default=1, type=int, help='bounding box thickness (pixels)')
+    parser.add_argument('--line-thickness', default=3, type=int, help='bounding box thickness (pixels)')
     parser.add_argument('--hide-labels', default=False, action='store_true', help='hide labels')
     parser.add_argument('--hide-conf', default=False, action='store_true', help='hide confidences')
     parser.add_argument('--half', action='store_true', help='use FP16 half-precision inference')
