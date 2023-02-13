@@ -199,7 +199,7 @@ if __name__ == '__main__':
     samples_cnt = {'threshold': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], 'num': [0, 0, 0, 0, 0, 0, 0, 0, 0], 'percent': [0, 0, 0, 0, 0, 0, 0, 0, 0]}
     parse_predict_txt(root_dir, samples_cnt)
     for i in range(len(samples_cnt['threshold'])):
-        samples_cnt['percent'][i] = samples_cnt['num'][i] * 1.0 / 46920 * 100
+        samples_cnt['percent'][i] = samples_cnt['num'][i] * 1.0 / 48068 * 100
     print(samples_cnt)
     data = DataFrame(samples_cnt)  # 将字典转换成为数据框
     data.to_csv('cnt.csv', index=False)

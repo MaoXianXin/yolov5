@@ -114,7 +114,7 @@ def kmean_anchors(dataset='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen
         with open(dataset, errors='ignore') as f:
             data_dict = yaml.safe_load(f)  # model dict
         from utils.datasets import LoadImagesAndLabels
-        dataset = LoadImagesAndLabels(data_dict['train'], augment=True, rect=True)
+        dataset = LoadImagesAndLabels("/home/mao/datasets/20221024-合同比对差异区域定位/20221024-授权书-差异定位/02-标记样本/train-20221025", augment=True, rect=True)
 
     # Get label wh
     shapes = img_size * dataset.shapes / dataset.shapes.max(1, keepdims=True)
@@ -167,4 +167,5 @@ def kmean_anchors(dataset='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen
             if verbose:
                 print_results(k, verbose)
 
+    print(print_results(k).astype(np.float32))
     return print_results(k)
