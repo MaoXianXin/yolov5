@@ -8,14 +8,49 @@
 
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: /home/mao/datasets/20220907训练样本汇总/train_data_20220907-1  # dataset root dir
-train: 20220907-1  # train images (relative to 'path') 128 images
-val: 20220907-1  # val images (relative to 'path') 128 images
+path: /home/maoxianxin/user_data_ssd/datasets/固定版面清分训练数据-20231216-32781-已标注-已查验-det  # dataset root dir
+train: train  # train images (relative to 'path') 128 images
+val: train  # val images (relative to 'path') 128 images
 test:  # test images (optional)
 
 # Classes
-nc: 1  # number of classes
-names: ['0-diffArea',]  # class names
+nc: 34  # number of classes
+names: [
+  "01-增值税专用发票",
+  "02-增值税普通发票",
+  "03-增值税电子专用发票",
+  "04-增值税电子普通发票",
+  "07-发票清单",
+  "08-火车票",
+  "09-飞机行程单",
+  "10-出租车票",
+  "11-定额发票",
+  "12-卷式发票",
+  "14-行驶证",
+  "16-营业执照",
+  "17-开户许可证",
+  "18-支票",
+  "19-银行承兑汇票",
+  "20-进账单",
+  "21-机动车发票",
+  "22-二手车发票",
+  "23-身份证正面",
+  "24-身份证反面",
+  "25-银行卡正面",
+  "26-银行卡反面",
+  "27-高速过路费",
+  "28-汽车票",
+  "29-通用机打发票",
+  "30-海关缴款书",
+  "31-其它",
+  "32-数电通用",
+  "33-数电不动产",
+  "34-数电货物运输",
+  "35-数电建筑",
+  "36-数电旅客运输",
+  "37-非税收票",
+  "38-出租汽车客票"
+]  # class names
 
 
 # Download script/URL (optional)

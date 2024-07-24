@@ -22,13 +22,50 @@ class Albumentations:
             check_version(A.__version__, '1.0.3', hard=True)  # version requirement
 
             T = [
-                A.Blur(p=0.01),
-                A.MedianBlur(p=0.01),
-                # A.ToGray(p=0.01),
-                A.CLAHE(p=0.01),
-                A.RandomBrightnessContrast(p=0.0),
-                A.RandomGamma(p=0.0),
-                A.ImageCompression(quality_lower=75, p=0.0)]  # transforms
+                A.RandomRotate90(p=1.0),
+                A.Rotate(limit=20, border_mode=0, p=0.1),
+                A.OneOf(
+                        [
+                            A.HueSaturationValue(always_apply=False, p=0.5, hue_shift_limit=(-20, 20), sat_shift_limit=(-30, 30), val_shift_limit=(-20, 20)),
+                            A.ChannelShuffle(always_apply=False, p=0.5),
+                            A.RGBShift(always_apply=False, p=0.5, r_shift_limit=(-20, 20), g_shift_limit=(-20, 20), b_shift_limit=(-20, 20)),
+                            A.RandomBrightnessContrast(always_apply=False, p=0.5, brightness_limit=(-0.2, 0.2), contrast_limit=(-0.2, 0.2), brightness_by_max=True),
+                            A.RandomGamma(always_apply=False, p=0.5, gamma_limit=(80, 120), eps=1e-07),
+                            A.CLAHE(always_apply=False, p=0.5, clip_limit=(1, 4), tile_grid_size=(8, 8)),
+                            A.ToGray(p=0.5),
+                        ],
+                        p=0.3,
+                    ),
+                A.OneOf(
+                        [
+                            A.Cutout(always_apply=False, p=0.5, num_holes=8, max_h_size=8, max_w_size=8),
+                        ],
+                        p=0.1,
+                    ),
+                A.OneOf(
+                        [
+                            A.GaussNoise(always_apply=False, p=0.5, var_limit=(10.0, 50.0)),
+                            A.ISONoise(always_apply=False, p=0.5, intensity=(0.1, 0.5), color_shift=(0.01, 0.05)),
+                            A.MultiplicativeNoise(always_apply=False, p=0.5, multiplier=(0.9, 1.1), per_channel=True, elementwise=True)
+                        ],
+                        p=0.1,
+                    ),
+                A.OneOf(
+                        [
+                            A.GridDistortion(always_apply=False, p=0.5, num_steps=5, distort_limit=(-0.3, 0.3), interpolation=0, border_mode=0, value=(0, 0, 0), mask_value=None),
+                            A.OpticalDistortion(always_apply=False, p=0.5, distort_limit=(-0.3, 0.3), shift_limit=(-0.05, 0.05), interpolation=0, border_mode=0, value=(0, 0, 0), mask_value=None),
+                        ],
+                        p=0.05,
+                    ),
+                A.OneOf(
+                        [
+                            A.Blur(always_apply=False, p=0.5, blur_limit=(3, 7)),
+                            A.MedianBlur(p=0.5),
+                            A.ImageCompression(always_apply=False, p=0.5, quality_lower=80, quality_upper=100, compression_type=0),
+                        ],
+                        p=0.05,
+                    ),
+            ]  # transforms
             self.transform = A.Compose(T, bbox_params=A.BboxParams(format='yolo', label_fields=['class_labels']))
 
             LOGGER.info(colorstr('albumentations: ') + ', '.join(f'{x}' for x in self.transform.transforms if x.p))
@@ -230,7 +267,7 @@ def copy_paste(im, labels, segments, p=0.5):
             if (ioa < 0.30).all():  # allow 30% obscuration of existing labels
                 labels = np.concatenate((labels, [[l[0], *box]]), 0)
                 segments.append(np.concatenate((w - s[:, 0:1], s[:, 1:2]), 1))
-                cv2.drawContours(im_new, [segments[j].astype(np.int32)], -1, (255, 255, 255), cv2.FILLED)
+                cv2.drawContours(im_new, [segments[j].astype(int)], -1, (255, 255, 255), cv2.FILLED)
 
         result = cv2.bitwise_and(src1=im, src2=im_new)
         result = cv2.flip(result, 1)  # augment segments (flip left-right)

@@ -149,7 +149,7 @@ class ConfusionMatrix:
             matches = np.zeros((0, 3))
 
         n = matches.shape[0] > 0
-        m0, m1, _ = matches.transpose().astype(np.int16)
+        m0, m1, _ = matches.transpose().astype(int)
         for i, gc in enumerate(gt_classes):
             j = m0 == i
             if n and sum(j) == 1:

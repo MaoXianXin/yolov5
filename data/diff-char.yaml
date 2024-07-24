@@ -8,14 +8,14 @@
 
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: /home/mao/datasets/20221024-合同比对差异区域定位/20221024-授权书-差异定位/02-标记样本/  # dataset root dir
-train: train-20221025  # train images (relative to 'path') 128 images
-val: train-20221025  # val images (relative to 'path') 128 images
+path: /home/mao/datasets/护照相似度/GIN_KAZ_UV_整图/GIN训练样本  # dataset root dir
+train: train  # train images (relative to 'path') 128 images
+val: train  # val images (relative to 'path') 128 images
 test:  # test images (optional)
 
 # Classes
 nc: 1  # number of classes
-names: ['0-innerDiff',]  # class names
+names: ['diff',]  # class names
 
 
 # Download script/URL (optional)
