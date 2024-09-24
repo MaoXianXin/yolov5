@@ -30,18 +30,18 @@ class Albumentations:
                             A.ChannelShuffle(always_apply=False, p=0.5),
                             A.RGBShift(always_apply=False, p=0.5, r_shift_limit=(-20, 20), g_shift_limit=(-20, 20), b_shift_limit=(-20, 20)),
                             A.RandomBrightnessContrast(always_apply=False, p=0.5, brightness_limit=(-0.2, 0.2), contrast_limit=(-0.2, 0.2), brightness_by_max=True),
-                            A.RandomGamma(always_apply=False, p=0.5, gamma_limit=(80, 120), eps=1e-07),
+                            A.RandomGamma(always_apply=False, p=0.5, gamma_limit=(80, 120)),
                             A.CLAHE(always_apply=False, p=0.5, clip_limit=(1, 4), tile_grid_size=(8, 8)),
                             A.ToGray(p=0.5),
                         ],
                         p=0.3,
                     ),
-                A.OneOf(
-                        [
-                            A.Cutout(always_apply=False, p=0.5, num_holes=8, max_h_size=8, max_w_size=8),
-                        ],
-                        p=0.1,
-                    ),
+                # A.OneOf(
+                #         [
+                #             A.Cutout(always_apply=False, p=0.5, num_holes=8, max_h_size=8, max_w_size=8),
+                #         ],
+                #         p=0.1,
+                #     ),
                 A.OneOf(
                         [
                             A.GaussNoise(always_apply=False, p=0.5, var_limit=(10.0, 50.0)),

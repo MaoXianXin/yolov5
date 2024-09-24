@@ -480,7 +480,13 @@ def save_one_box(xyxy, im, file=Path('im.jpg'), gain=1.02, pad=10, square=False,
     b = xyxy2xywh(xyxy)  # boxes
     if square:
         b[:, 2:] = b[:, 2:].max(1)[0].unsqueeze(1)  # attempt rectangle to square
-    b[:, 2:] = b[:, 2:] * gain + pad  # box wh * gain + pad
+    gain_w=1.08
+    gain_h=1.05
+    pad_w=10
+    pad_h=6
+    # Separate width and height expansion
+    b[:, 2] = b[:, 2] * gain_w + pad_w  # box width * gain_w + pad_w
+    b[:, 3] = b[:, 3] * gain_h + pad_h  # box height * gain_h + pad_h
     xyxy = xywh2xyxy(b).long()
     clip_coords(xyxy, im.shape)
     crop = im[int(xyxy[0, 1]):int(xyxy[0, 3]), int(xyxy[0, 0]):int(xyxy[0, 2]), ::(1 if BGR else -1)]

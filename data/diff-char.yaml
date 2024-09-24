@@ -8,14 +8,30 @@
 
 
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: /home/mao/datasets/护照相似度/GIN_KAZ_UV_整图/GIN训练样本  # dataset root dir
+path: /home/mao/datasets/护照要素定位/合并各个国家的训练数据  # dataset root dir
 train: train  # train images (relative to 'path') 128 images
 val: train  # val images (relative to 'path') 128 images
 test:  # test images (optional)
 
 # Classes
-nc: 1  # number of classes
-names: ['diff',]  # class names
+nc: 15  # number of classes
+names: [
+    "Country_code",
+    "Date_of_birth",
+    "Date_of_expiry",
+    "Date_of_issue",
+    "Given_names",
+    "Issuing_authority",
+    "MRZ_1",
+    "MRZ_2",
+    "Nationality",
+    "Passport",
+    "Place_of_birth",
+    "Profession",
+    "Sex",
+    "Surname",
+    "Type"
+]  # class names
 
 
 # Download script/URL (optional)
