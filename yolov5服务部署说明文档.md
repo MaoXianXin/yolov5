@@ -55,7 +55,14 @@ output [
 转换好模型之后启动nvcr.io/nvidia/tritonserver:23.03-py3镜像进行部署
 ```
 # --model-repository要使用绝对路径
-docker run --gpus all --shm-size=16g --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --name tritonserver -p18220:8000 -p18221:8001 -p18222:8002 -v $PWD:$PWD nvcr.io/nvidia/tritonserver:23.03-py3 tritonserver --model-repository=/home/mao/workspace/train_yolov5/yolov5/model_repository
+docker run -d --gpus all --shm-size=16g --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --name tritonserver -p18220:8000 -p18221:8001 -p18222:8002 -v $PWD:$PWD nvcr.io/nvidia/tritonserver:23.03-py3 tritonserver --model-repository=/home/mao/workspace/train_yolov5/yolov5/model_repository
+```
+
+多张显卡情况下如何指定使用某一张:
+
+```
+--gpus '"device=0,1"'用于指定容器仅使用GPU 0和GPU 1
+如果只想使用单个GPU，比如GPU 0，那么可以将其修改为--gpus '"device=0"'
 ```
 
 部署好服务后进行请求测试:
